@@ -4,7 +4,6 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:help_app/view/home.dart';
 import 'package:help_app/view/intro%20screen/splash_screen.dart';
-
 import 'constants/color_constants.dart';
 
 void main() {
