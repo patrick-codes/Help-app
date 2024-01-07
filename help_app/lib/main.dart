@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        defaultTransition: Transition.rightToLeft,
+        defaultTransition: Transition.leftToRight,
         color: primaryColor,
         theme: ThemeData(
           textTheme: GoogleFonts.openSansTextTheme(
