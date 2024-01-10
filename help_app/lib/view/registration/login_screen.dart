@@ -3,11 +3,18 @@ import 'package:get/get.dart';
 import 'package:help_app/constants/color_constants.dart';
 import 'package:text_divider/text_divider.dart';
 
-import '../home.dart';
+import '../home_main.dart';
 import 'signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +74,8 @@ class LoginScreen extends StatelessWidget {
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+                        hintStyle: const TextStyle(fontSize: 13),
+                        hintText: 'email address',
                         prefixIcon: const Icon(Icons.email_rounded),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100),
@@ -97,9 +106,21 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     TextFormField(
-                      obscureText: true,
+                      obscureText: isVisible ? false : true,
                       decoration: InputDecoration(
+                        hintStyle: const TextStyle(fontSize: 13),
+                        hintText: 'password',
                         prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isVisible = false;
+                            });
+                          },
+                          child: !isVisible
+                              ? const Icon(Icons.visibility_off)
+                              : const Icon(Icons.visibility),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100),
                         ),

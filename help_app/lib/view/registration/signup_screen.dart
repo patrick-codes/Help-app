@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:help_app/view/home.dart';
+import 'package:help_app/view/home_main.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:text_divider/text_divider.dart';
 
 import '../../constants/color_constants.dart';
 import 'login_screen.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+bool isVisible = true;
+
+class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +74,8 @@ class SignupScreen extends StatelessWidget {
                     const SizedBox(height: 5),
                     TextFormField(
                       decoration: InputDecoration(
+                        hintStyle: const TextStyle(fontSize: 13),
+                        hintText: 'full name',
                         prefixIcon: const Icon(Icons.person_3_rounded),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100),
@@ -98,6 +108,8 @@ class SignupScreen extends StatelessWidget {
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+                        hintStyle: const TextStyle(fontSize: 13),
+                        hintText: 'email address',
                         prefixIcon: const Icon(Icons.email_rounded),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100),
@@ -128,9 +140,21 @@ class SignupScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     TextFormField(
-                      obscureText: true,
+                      obscureText: isVisible ? false : true,
                       decoration: InputDecoration(
+                        hintStyle: const TextStyle(fontSize: 13),
+                        hintText: 'password',
                         prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isVisible = false;
+                            });
+                          },
+                          child: !isVisible
+                              ? const Icon(Icons.visibility_off)
+                              : const Icon(Icons.visibility),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100),
                         ),

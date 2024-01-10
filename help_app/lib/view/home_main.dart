@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:help_app/constants/color_constants.dart';
+import 'package:help_app/view/home_page.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../widgets/drawer/nav_drawer.dart';
+import 'alerts_page.dart';
+import 'favorite_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,26 +16,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-  final List<Widget> _widgetOptions = [
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
-  ];
-
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(
-      () {
-        _selectedIndex = index;
-      },
-    );
-  }
+  static List<Widget> pages = <Widget>[
+    const HomeScreen(),
+    const FavoritePage(),
+    const AlertPage(),
+    const HomeScreen(),
+    const AlertPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const NavDrawer(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: primaryColor,
@@ -44,15 +43,21 @@ class _MyHomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
           child: GNav(
-            rippleColor: Colors.grey[300]!,
-            hoverColor: Colors.grey[100]!,
+            selectedIndex: _selectedIndex,
+            onTabChange: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            hoverColor: tertiaryColor,
             activeColor: tertiaryColor,
-            iconSize: 22,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            iconSize: 15,
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
             duration: const Duration(milliseconds: 300),
-            tabBackgroundColor: primaryColor,
-            tabBorderRadius: 13.0,
             color: secondaryColor,
+            curve: Curves.linear,
+            style: GnavStyle.oldSchool,
+            textSize: 8,
             tabs: const [
               GButton(
                 icon: LineIcons.home,
@@ -67,23 +72,18 @@ class _MyHomePageState extends State<HomePage> {
                 text: 'Contact',
               ),
               GButton(
+                icon: LineIcons.list,
+                text: 'Order',
+              ),
+              GButton(
                 icon: LineIcons.bell,
                 text: 'Alerts',
               ),
             ],
-            selectedIndex: _selectedIndex,
-            onTabChange: (index) {
-              _onItemTapped(index);
-            },
           ),
         ),
       ),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: const Icon(
-          Icons.menu,
-          color: secondaryColor,
-        ),
         backgroundColor: primaryColor,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,16 +100,7 @@ class _MyHomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
+      body: pages.elementAt(_selectedIndex),
     );
   }
 }

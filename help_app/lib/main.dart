@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:help_app/view/home.dart';
+import 'package:help_app/view/home_main.dart';
 import 'package:help_app/view/intro%20screen/splash_screen.dart';
 import 'constants/color_constants.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        defaultTransition: Transition.leftToRight,
+        defaultTransition: Transition.rightToLeft,
         color: primaryColor,
         theme: ThemeData(
           textTheme: GoogleFonts.openSansTextTheme(

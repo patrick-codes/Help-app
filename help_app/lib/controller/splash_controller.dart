@@ -19,9 +19,7 @@ class SplashController extends GetxController {
   }
 }
 */
-
 import 'package:get/get.dart';
-import 'package:help_app/view/home.dart';
 import 'package:help_app/view/intro%20screen/onbaording/onboarding_screen.dart';
 
 class SplashController extends GetxController {
