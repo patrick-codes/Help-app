@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:help_app/widgets/customapp_bar.dart';
 
 import '../../constants/color_constants.dart';
 import '../../model/news_model.dart';
 
 class CardDetails extends StatefulWidget {
-  const CardDetails({super.key, required this.newsDetails});
-
+  const CardDetails(
+      {super.key, required this.newsDetails, required this.address});
+  final String address;
   final NewsModel newsDetails;
 
   @override

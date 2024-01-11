@@ -154,7 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 12),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => const HomePage());
+                        Get.to(() => const HomePage(
+                              address: '',
+                            ));
                       },
                       child: Container(
                         decoration: BoxDecoration(

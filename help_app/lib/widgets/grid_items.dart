@@ -55,6 +55,7 @@ class GridItems extends StatelessWidget {
           onTap: () {
             Get.to(() => CardDetails(
                   newsDetails: news,
+                  address: '',
                 ));
           },
           child: Container(

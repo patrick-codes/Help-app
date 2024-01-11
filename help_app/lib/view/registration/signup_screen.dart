@@ -171,7 +171,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(height: 15),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => const HomePage());
+                        Get.to(() => const HomePage(
+                              address: '',
+                            ));
                       },
                       child: Container(
                         decoration: BoxDecoration(
