@@ -76,14 +76,17 @@ class _MyHomePageState extends State<HomePage> {
                 text: 'Order',
               ),
               GButton(
-                icon: LineIcons.bell,
-                text: 'Alerts',
+                icon: LineIcons.user,
+                text: 'Profile',
               ),
             ],
           ),
         ),
       ),
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: secondaryColor,
+        ),
         backgroundColor: primaryColor,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,9 +96,12 @@ class _MyHomePageState extends State<HomePage> {
               width: 120,
               image: AssetImage("assets/icons/logo.png"),
             ),
-            Icon(
-              Icons.account_circle,
-              color: secondaryColor,
+            Badge(
+              label: Text("2"),
+              child: Icon(
+                LineIcons.bell,
+                color: secondaryColor,
+              ),
             ),
           ],
         ),

@@ -19,7 +19,7 @@ class _NavDrawerState extends State<NavDrawer> {
     return Drawer(
       backgroundColor: tertiaryColor2,
       child: ListView(
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.only(top: 50),
         children: [
           /*const UserAccountsDrawerHeader(
             accountName: Text(
@@ -45,6 +45,8 @@ class _NavDrawerState extends State<NavDrawer> {
           ),
           */
           ListTile(
+            selectedColor: secondaryColor,
+            selectedTileColor: secondaryColor,
             leading: const Icon(
               LineIcons.phone,
               color: secondaryColor,
@@ -140,48 +142,52 @@ class _NavDrawerState extends State<NavDrawer> {
             onTap: () {},
           ),
           const SizedBox(height: 80),
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Copyright",
-                    style: TextStyle(
-                      color: secondaryColor,
-                      fontSize: 10,
+          /*Container(
+            alignment: Alignment.bottomCenter,
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Copyright",
+                      style: TextStyle(
+                        color: secondaryColor,
+                        fontSize: 10,
+                      ),
                     ),
-                  ),
-                  Icon(
-                    LineIcons.copyright,
-                    color: secondaryColor,
-                    size: 13,
-                  ),
-                  Text(
-                    "pensa aamusted",
-                    style: TextStyle(
+                    Icon(
+                      LineIcons.copyright,
                       color: secondaryColor,
-                      fontSize: 10,
+                      size: 13,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 3),
-              Text(
-                "Developed by Kofik Technology Ghana Accra",
-                style: TextStyle(fontSize: 10, color: secondaryColor),
-              ),
-              Text(
-                "www.kofiktechgh.com",
-                style: TextStyle(
-                  color: tertiaryColor,
-                  fontSize: 10,
+                    Text(
+                      "pensa aamusted",
+                      style: TextStyle(
+                        color: secondaryColor,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                SizedBox(height: 3),
+                Text(
+                  "Developed by Kofik Technology Ghana Accra",
+                  style: TextStyle(fontSize: 10, color: secondaryColor),
+                ),
+                Text(
+                  "www.kofiktechgh.com",
+                  style: TextStyle(
+                    color: tertiaryColor,
+                    fontSize: 10,
+                  ),
+                ),
+              ],
+            ),
           ),
+          */
           /*Padding(
             padding: const EdgeInsets.all(15.0),
             child: GestureDetector(
