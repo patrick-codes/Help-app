@@ -14,6 +14,7 @@ import '../widgets/customapp_bar.dart';
 import '../widgets/drawer/nav_drawer.dart';
 import 'alerts_page.dart';
 import 'favorite_page.dart';
+import 'map_page.dart';
 
 class HomePage extends StatefulWidget {
   final String address;
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<HomePage> {
     const HomeScreen(),
     const FavoritePage(),
     const AlertPage(),
-    const HomeScreen(),
+    const MapPage(),
     const AlertPage(),
   ];
 
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<HomePage> {
     print(_currentUserLocation);
   }
 
-  _addressFromCordinates() async {
+  Future _addressFromCordinates() async {
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
           _currentUserLocation!.latitude, _currentUserLocation!.longitude);
@@ -219,7 +220,7 @@ class _MyHomePageState extends State<HomePage> {
   //Refresh page function
   Future<void> _refresh() async {
     setState(() async {
-      await _loadLocation();
+      _loadLocation();
     });
     await _loadLocation();
   }
@@ -300,8 +301,8 @@ class _MyHomePageState extends State<HomePage> {
                 text: 'Contact',
               ),
               GButton(
-                icon: LineIcons.list,
-                text: 'Order',
+                icon: LineIcons.mapAlt,
+                text: 'Map',
               ),
               GButton(
                 icon: LineIcons.user,
