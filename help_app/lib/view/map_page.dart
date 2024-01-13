@@ -1,12 +1,15 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/color_constants.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -96,7 +99,7 @@ class _MapPageState extends State<MapPage> {
       print(userLongitude);
 
       // Return LatLng object
-      return LatLng(userLatitude, userLongitude);
+      return initialCenter;
     } catch (e) {
       print(e);
       // Return null or handle the error accordingly
@@ -104,17 +107,16 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
-  LatLng initialCenter = const LatLng(0.0, 0.0); // Default initial center
+  LatLng initialCenter = const LatLng(0.0, 0.0);
 
   Future<void> _updateMapCenter() async {
     LatLng? coordinates = await _addressFromCoordinates();
 
     if (coordinates != null) {
-      setState(() {
+      setState(() async {
         initialCenter = coordinates;
       });
     } else {
-      // Handle the case where an error occurred in the _addressFromCoordinates function
       print("Error occurred while getting coordinates");
     }
   }
@@ -171,26 +173,53 @@ class _MapPageState extends State<MapPage> {
                   markers: [
                     Marker(
                       point: const LatLng(5.5768149, -0.3266899),
-                      width: 34,
-                      height: 35,
                       child: Builder(
                         builder: (BuildContext context) {
-                          return Container(
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  spreadRadius: 1.5,
-                                  blurRadius: 2,
-                                )
-                              ],
-                              shape: BoxShape.circle,
-                              color: primaryColor,
-                            ),
-                            child: const Icon(
-                              Icons.location_pin,
-                              size: 23,
-                              color: Colors.red,
+                          return GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(8.0),
+                                        bottom: Radius.circular(8),
+                                      ),
+                                    ),
+                                    //: const Text("Current Location"),
+                                    content: Text(currentAddress),
+                                    /* actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: const Text("OK"),
+                                      ),
+                                    ],
+                                    */
+                                  );
+                                },
+                              );
+                            },
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    spreadRadius: 1.5,
+                                    blurRadius: 2,
+                                  )
+                                ],
+                                shape: BoxShape.circle,
+                                color: primaryColor,
+                              ),
+                              child: const Icon(
+                                Icons.location_pin,
+                                size: 18,
+                                color: Colors.red,
+                              ),
                             ),
                           );
                         },
@@ -219,6 +248,14 @@ class _MapPageState extends State<MapPage> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: primaryColor,
+                boxShadow: const [
+                  BoxShadow(
+                    blurStyle: BlurStyle.normal,
+                    color: Colors.grey,
+                    spreadRadius: 1.5,
+                    blurRadius: 2,
+                  )
+                ],
               ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
