@@ -147,25 +147,9 @@ class _MapPageState extends State<MapPage> {
                 //5.5768149, -0.3266899
                 initialCenter: initialCenter,
                 initialZoom: 5.0,
-                /*interactionOptions: const InteractionOptions(
-                  flags: InteractiveFlag.all,
-                  debugMultiFingerGestureWinner: false,
-                  enableMultiFingerGestureRace: false,
-                  rotationThreshold: 20.0,
-                  rotationWinGestures: MultiFingerGesture.rotate,
-                  pinchZoomThreshold: 0.5,
-                  pinchZoomWinGestures: MultiFingerGesture.pinchZoom |
-                      MultiFingerGesture.pinchMove,
-                  pinchMoveThreshold: 40.0,
-                  pinchMoveWinGestures: MultiFingerGesture.pinchZoom |
-                      MultiFingerGesture.pinchMove,
-                  enableScrollWheel: true,
-                ),*/
               ),
               children: [
                 TileLayer(
-                  //'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  //'http://tile.stamen.com/toner/{z}/{x}/{y}.png'
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName: 'com.example.app',
                 ),

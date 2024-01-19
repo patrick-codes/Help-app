@@ -5,7 +5,6 @@ import 'package:help_app/model/news_model.dart';
 import 'package:help_app/view/alerts_page.dart';
 import 'package:help_app/view/card%20details/card_details.dart';
 import 'package:help_app/view/favorite_page.dart';
-
 import '../view/registration/login_screen.dart';
 
 class GridItems extends StatelessWidget {
