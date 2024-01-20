@@ -4,6 +4,7 @@ import 'package:help_app/constants/color_constants.dart';
 import 'package:help_app/model/news_model.dart';
 import 'package:help_app/view/alerts_page.dart';
 import 'package:help_app/view/card%20details/card_details.dart';
+import 'package:help_app/view/chat_page.dart';
 import 'package:help_app/view/favorite_page.dart';
 import '../view/registration/login_screen.dart';
 
@@ -12,9 +13,9 @@ class GridItems extends StatelessWidget {
 
   final List pages = [
     const FavoritePage(),
-    const AlertPage(),
+    const ChatPage(),
     const FavoritePage(),
-    const AlertPage(),
+    const ChatPage(),
   ];
   final List cardNames = [
     "card1",
@@ -52,10 +53,13 @@ class GridItems extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            Get.to(() => CardDetails(
+            Get.to(() => const ChatPage());
+            /* 
+           Get.to(() => CardDetails(
                   newsDetails: news,
                   address: '',
                 ));
+          */
           },
           child: Container(
             margin: const EdgeInsets.all(10),

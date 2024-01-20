@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -297,8 +298,8 @@ class _MyHomePageState extends State<HomePage> {
                 text: 'Favorite',
               ),
               GButton(
-                icon: LineIcons.phone,
-                text: 'Contact',
+                icon: CupertinoIcons.chat_bubble_text_fill,
+                text: 'Chat',
               ),
               GButton(
                 icon: LineIcons.mapAlt,
