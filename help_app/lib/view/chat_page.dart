@@ -78,10 +78,13 @@ class _ChatPageState extends State<ChatPage> {
         },
       ),
       bottomSheet: Container(
-        height: 65,
-        decoration: const BoxDecoration(
+        margin: const EdgeInsets.only(bottom: 8),
+        width: 350,
+        height: 60,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
           color: Colors.white,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               spreadRadius: 2,
               blurRadius: 10,
@@ -98,8 +101,9 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 10.0),
               child: Icon(
+                color: tertiaryColor,
                 Icons.emoji_emotions_outlined,
               ),
             ),

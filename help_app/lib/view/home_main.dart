@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:help_app/constants/color_constants.dart';
 import 'package:help_app/view/home_page.dart';
+import 'package:help_app/view/profile/profile_page.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,7 +45,7 @@ class _MyHomePageState extends State<HomePage> {
     const FavoritePage(),
     const AlertPage(),
     const MapPage(),
-    const AlertPage(),
+    const ProfilePage(),
   ];
 
   String locationMessage = 'Current Location of user';

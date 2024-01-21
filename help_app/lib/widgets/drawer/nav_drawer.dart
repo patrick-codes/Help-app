@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:help_app/constants/color_constants.dart';
+import 'package:help_app/view/profile/profile_page.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -98,7 +99,9 @@ class _NavDrawerState extends State<NavDrawer> {
                 color: secondaryColor,
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const ProfilePage());
+            },
           ),
           ListTile(
             leading: const Icon(

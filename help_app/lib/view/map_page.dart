@@ -31,6 +31,8 @@ class _MapPageState extends State<MapPage> {
   late LocationPermission permission;
   Position? _currentUserLocation;
   String currentAddress = '';
+  String placeLoc = '';
+  String placeAdm = '';
   String currentStreet = '';
   double? distanceInMeters = 0.0;
   double? distanceInKm = 0.0;
@@ -92,6 +94,8 @@ class _MapPageState extends State<MapPage> {
             '${place.locality} ${place.administrativeArea}, ${place.country}';
         userLatitude = _currentUserLocation!.latitude;
         userLongitude = _currentUserLocation!.longitude;
+        placeLoc = '${place.locality}';
+        placeAdm = '${place.country}';
       });
 
       print(currentAddress);
@@ -172,17 +176,101 @@ class _MapPageState extends State<MapPage> {
                                         bottom: Radius.circular(8),
                                       ),
                                     ),
-                                    //: const Text("Current Location"),
-                                    content: Text(currentAddress),
-                                    /* actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: const Text("OK"),
+                                    actions: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          ListTile(
+                                            leading: const CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  "assets/images/img2.png"),
+                                            ),
+                                            title: const Text(
+                                              "Sandra Smith",
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                            subtitle: Row(
+                                              children: [
+                                                Text(
+                                                  placeLoc,
+                                                  style: const TextStyle(
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 2),
+                                                Text(
+                                                  placeAdm,
+                                                  style: const TextStyle(
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            trailing: const Text("24 years"),
+                                          ),
+                                          const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons
+                                                        .favorite_outline_rounded,
+                                                    size: 13,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Text(
+                                                    "Married",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 10),
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.work_history_outlined,
+                                                    size: 13,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Text(
+                                                    "Nurse",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 10),
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.people_alt_outlined,
+                                                    size: 13,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Text(
+                                                    "3 Children",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 3),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ],
-                                    */
                                   );
                                 },
                               );
