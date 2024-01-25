@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:help_app/constants/color_constants.dart';
 
 import '../model/news_model.dart';
 import '../widgets/grid_items.dart';
+import 'scheduled_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     NewsModel news = newsDetails[index];
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => SchedulePage());
+                      },
                       child: Row(
                         children: [
                           // for (int i = 1; i < 4; i++)

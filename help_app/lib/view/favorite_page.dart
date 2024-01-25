@@ -13,7 +13,7 @@ class FavoritePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Favorites bPage',
+              'Favorites Page',
             ),
           ],
         ),

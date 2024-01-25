@@ -9,6 +9,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:help_app/constants/color_constants.dart';
 import 'package:help_app/view/home_page.dart';
 import 'package:help_app/view/profile/profile_page.dart';
+import 'package:help_app/view/scheduled_page.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<HomePage> {
 
   static List<Widget> pages = <Widget>[
     const HomeScreen(),
-    const FavoritePage(),
+    SchedulePage(),
     const AlertPage(),
     const MapPage(),
     const ProfilePage(),
@@ -295,8 +296,8 @@ class _MyHomePageState extends State<HomePage> {
                 text: 'Home',
               ),
               GButton(
-                icon: LineIcons.heart,
-                text: 'Favorite',
+                icon: LineIcons.calendar,
+                text: 'Schedule',
               ),
               GButton(
                 icon: CupertinoIcons.chat_bubble_text_fill,

@@ -315,18 +315,17 @@ class _MapPageState extends State<MapPage> {
             left: 20,
             bottom: 20,
             child: Container(
-              height: 30,
-              width: 150,
+              height: 40,
+              width: 160,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: primaryColor,
+                borderRadius: BorderRadius.circular(20),
+                color: tertiaryColor,
                 boxShadow: const [
                   BoxShadow(
-                    blurStyle: BlurStyle.normal,
-                    color: Colors.grey,
-                    spreadRadius: 1.5,
-                    blurRadius: 2,
-                  )
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    color: Colors.black12,
+                  ),
                 ],
               ),
               child: const Row(
@@ -334,15 +333,15 @@ class _MapPageState extends State<MapPage> {
                 children: [
                   Icon(
                     LineIcons.phone,
-                    color: tertiaryColor,
+                    color: primaryColor,
                     size: 20,
                   ),
                   SizedBox(width: 3),
                   Text(
                     "Call Emergency Now",
                     style: TextStyle(
-                        fontSize: 10,
-                        color: tertiaryColor,
+                        fontSize: 12,
+                        color: primaryColor,
                         fontWeight: FontWeight.bold),
                   ),
                 ],

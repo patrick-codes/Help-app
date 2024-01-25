@@ -5,16 +5,18 @@ import 'package:help_app/model/news_model.dart';
 import 'package:help_app/view/alerts_page.dart';
 import 'package:help_app/view/card%20details/card_details.dart';
 import 'package:help_app/view/chat_page.dart';
+import 'package:help_app/view/councellors/councellors_page.dart';
 import 'package:help_app/view/favorite_page.dart';
 import '../view/registration/login_screen.dart';
+import '../view/scheduled_page.dart';
 
 class GridItems extends StatelessWidget {
   GridItems({super.key});
 
   final List pages = [
-    const FavoritePage(),
+    SchedulePage(),
     const ChatPage(),
-    const FavoritePage(),
+    SchedulePage(),
     const ChatPage(),
   ];
   final List cardNames = [
@@ -50,10 +52,9 @@ class GridItems extends StatelessWidget {
       ),
       itemBuilder: (BuildContext context, int index) {
         NewsModel news = newsDetails[index];
-
         return GestureDetector(
           onTap: () {
-            Get.to(() => const ChatPage());
+            Get.to(() => CouncellorsPage());
             /* 
            Get.to(() => CardDetails(
                   newsDetails: news,
