@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:help_app/view/home_main.dart';
 import 'package:help_app/view/intro%20screen/onbaording/onboarding_screen.dart';
+import 'package:help_app/view/registration/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants/color_constants.dart';
 import '../../../view/intro screen/splash_screen.dart';
@@ -32,7 +33,7 @@ class AuthenticationRepository extends GetxController {
     ever(firebaseUser, setInitialScreen);
   }
 
-  Future<void> setInitialScreen(User? user) async {
+  /*Future<void> setInitialScreen(User? user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool hasShownScreens = prefs.getBool('hasShownScreens') ?? false;
 
@@ -55,20 +56,23 @@ class AuthenticationRepository extends GetxController {
       }
     }
   }
-
-  /*setInitialScreen(User? user) async {
-    /*  user == null
-        ? Get.offAll(() => SplashScreen())
-        : Get.offAll(() => HomeScreenNew());
 */
+  setInitialScreen(User? user) async {
     user == null
+        ? Get.offAll(() => const SplashScreen())
+        : Get.offAll(() => const HomePage(
+              address: '',
+            ));
+
+    /*user == null
         ? Get.offAll(() => SplashScreen())
         : user.emailVerified
-            ? Get.offAll(() => HomeScreenNew(
-                  email: user.displayName!,
-                ))
-            : Get.offAll(() => const WelcomeScreen());
-  }*/
+            ? Get.offAll(() => HomePage(
+              address: '',
+            ))
+            : Get.offAll(() => const OnBoardingScreen());
+            */
+  }
 
   //PhonePass Login
   Future<void> logIn(String phoneNumber, String password) async {
@@ -250,26 +254,27 @@ class AuthenticationRepository extends GetxController {
 
 //SignupAuth
   Future<void> createUserWithEmailAndPassword(
-      String sEmail, String sPassword) async {
+      String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-          email: sEmail, password: sPassword);
-      if (!_auth.currentUser!.emailVerified) {
+          email: email, password: password);
+      /*if (!_auth.currentUser!.emailVerified) {
         await sendEmailVerification();
       } else if (_auth.currentUser!.emailVerified) {
-        firebaseUser.value != null
-            ? Get.offAll(() => HomePage(
-                  address: '',
-                ))
-            //replace route with signupscreen later
-            : Get.offAll(() => const OnBoardingScreen());
-      }
+        */
+      firebaseUser.value != null
+          ? Get.offAll(() => const HomePage(
+                address: '',
+              ))
+          //replace route with signupscreen later
+          : Get.offAll(() => const SignupScreen());
+//}
     } on FirebaseAuthException catch (e) {
       final excep = SignUpWithEmailAndPasswordFailure.code(e.code);
       print('FIREBASE AUTH EXCEPTION - ${excep.message}');
       Get.snackbar(
         'ERROR!!',
-        excep.message,
+        e.code,
         duration: const Duration(seconds: 4),
         //colorText: Colors.white,
         backgroundColor: secondaryColor,
@@ -278,19 +283,7 @@ class AuthenticationRepository extends GetxController {
 
       //Wprint('FIREBASE AUTH EXCEPTION - ${excep.message}');
       //throw excep;
-    } catch (_) {
-      const excep = SignUpWithEmailAndPasswordFailure();
-      print('FIREBASE AUTH EXCEPTION - ${excep.message}');
-      Get.snackbar(
-        'ERROR!!',
-        excep.message,
-        duration: const Duration(seconds: 4),
-        //colorText: Colors.white,
-        backgroundColor: secondaryColor,
-        overlayBlur: 3,
-      );
-      throw excep;
-    }
+    } catch (e) {}
   }
 
 //LoginAuth Email & Password
@@ -298,22 +291,21 @@ class AuthenticationRepository extends GetxController {
       String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      if (!_auth.currentUser!.emailVerified) {
-        await sendEmailVerification();
+      /*if (!_auth.currentUser!.emailVerified) {
+      await sendEmailVerification();
         Get.to(() => const LoginScreen());
-      } else if (_auth.currentUser!.emailVerified) {
-        firebaseUser.value != null
-            ? Get.offAll(() => HomePage(
-                  address: '',
-                ))
-            //replace route with signupscreen later
-
-            : Get.offAll(() => const OnBoardingScreen());
-      }
+      } else */
+      //if (_auth.currentUser!.emailVerified) {
+      firebaseUser.value != null
+          ? Get.offAll(() => const HomePage(
+                address: '',
+              ))
+          //replace route with signupscreen later
+          : Get.offAll(() => const SignupScreen());
+//}
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
-        'ERROR!!', 'Check your mail to verify your account' '${e.code}',
-
+        'ERROR!!', e.code,
         duration: const Duration(seconds: 4),
         //colorText: Colors.white,
         backgroundColor: secondaryColor,

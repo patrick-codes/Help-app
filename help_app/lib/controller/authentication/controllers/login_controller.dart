@@ -9,8 +9,6 @@ class LoginController extends GetxController {
   static LoginController get instance => Get.find();
 
 //TextEditingControllers to get data from TextFields
-  final username = TextEditingController();
-  final number = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
 

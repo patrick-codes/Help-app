@@ -9,13 +9,9 @@ class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
 
   // TextEditingControllers to get data from TextFields
-  final sEmail = TextEditingController();
-  final sPassword = TextEditingController();
   final fullname = TextEditingController();
   final email = TextEditingController();
-  final city = TextEditingController();
-  final phone = TextEditingController();
-  final address = TextEditingController();
+  final password = TextEditingController();
 
   final userRepo = Get.put(UserRepository());
 
@@ -25,9 +21,9 @@ class SignUpController extends GetxController {
   }
 
   // Register Function
-  void registerUser(String sEmail, String sPassword) {
+  void registerUser(String email, String password) {
     AuthenticationRepository.instance
-        .createUserWithEmailAndPassword(sEmail, sPassword);
+        .createUserWithEmailAndPassword(email, password);
   }
 
   // LoginUser With PhonePass
@@ -73,13 +69,9 @@ class SignUpController extends GetxController {
   @override
   void dispose() {
     // Dispose of any resources, such as TextEditingControllers
-    sEmail.dispose();
-    sPassword.dispose();
     fullname.dispose();
     email.dispose();
-    city.dispose();
-    phone.dispose();
-    address.dispose();
+    password.dispose();
 
     super.dispose();
   }

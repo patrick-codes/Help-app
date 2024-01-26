@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../constants/color_constants.dart';
+import '../../controller/authentication/repository/authentication_repository.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -205,6 +207,68 @@ class ProfilePage extends StatelessWidget {
                 color: Colors.grey,
               ),
               ListTile(
+                onTap: () {
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(10.0),
+                            bottom: Radius.circular(10),
+                          ),
+                        ),
+                        title: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Confirm logout',
+                              style: TextStyle(
+                                color: primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        content: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Are you sure you want to logout?'),
+                          ],
+                        ),
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    color: primaryColor,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  AuthenticationRepository.instance.logout();
+                                },
+                                child: const Text(
+                                  'Logout',
+                                  style: TextStyle(
+                                    color: primaryColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 leading: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -235,7 +299,7 @@ class ProfilePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "HappyHelp v1.2",
+                      "HappyHelp v1.1",
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
