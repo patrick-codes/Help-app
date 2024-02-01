@@ -191,6 +191,10 @@ class _SignupScreenState extends State<SignupScreen> {
                           GestureDetector(
                             onTap: () {
                               if (formKey.currentState!.validate()) {
+                                formKey.currentState!.save();
+                                setState(() {
+                                  isLoading = true;
+                                });
                                 SignUpController.instance.registerUser(
                                     controller.email.text.trim(),
                                     controller.password.text.trim());
@@ -203,7 +207,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 SignUpController.instance.createUser(user);
 
                                 setState(() {
-                                  isLoading = true;
+                                  isLoading = false;
                                 });
                               }
                             },

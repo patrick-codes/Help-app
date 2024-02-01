@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_app/constants/color_constants.dart';
+import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 import 'package:text_divider/text_divider.dart';
-
 import '../../controller/authentication/controllers/login_controller.dart';
 import '../home_main.dart';
 import 'signup_screen.dart';
@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isChecked = false;
   bool isLoading = false;
   bool isToggeled = true;
+  bool isVisible = true;
 
   String? formValidate(value) {
     if (value == null || value.isEmpty) {
@@ -28,8 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     return null;
   }
-
-  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 5),
                           TextFormField(
                             controller: controller.password,
-                            obscureText: isVisible ? false : true,
+                            obscureText: isVisible,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Enter Password';
@@ -153,12 +152,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               suffixIcon: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    isVisible = false;
+                                    isVisible = !isVisible;
                                   });
+                                  setState(() {});
                                 },
                                 child: !isVisible
-                                    ? const Icon(Icons.visibility_off)
-                                    : const Icon(Icons.visibility),
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(100),
@@ -197,13 +197,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
                           setState(() {
                             isLoading = true;
                           });
-                          LoginController.instance.loginUser(
-                            controller.email.text.trim(),
-                            controller.password.text.trim(),
-                          );
+                          try {
+                            await LoginController.instance.loginUser(
+                              controller.email.text.trim(),
+                              controller.password.text.trim(),
+                            );
+                          } catch (e) {
+                            setState(() {
+                              isLoading = !isLoading;
+                            });
+                          }
                         }
                       },
                       child: Container(
@@ -213,18 +220,40 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         height: 50,
                         width: double.infinity,
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Login",
-                              style: TextStyle(
-                                color: primaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
+                        child: Center(
+                          child: isLoading
+                              ? const Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Loading....",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: primaryColor,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    NutsActivityIndicator(
+                                      activeColor: secondaryColor,
+                                      inactiveColor: primaryColor,
+                                      tickCount: 24,
+                                      relativeWidth: 0.5,
+                                      radius: 12,
+                                      startRatio: 0.7,
+                                      animationDuration:
+                                          Duration(milliseconds: 500),
+                                    ),
+                                  ],
+                                )
+                              : const Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: primaryColor,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
@@ -262,7 +291,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 30),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        LoginController.instance.googleSignIn();
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(

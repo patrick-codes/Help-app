@@ -9,7 +9,7 @@ import '../../constants/color_constants.dart';
 import '../../widgets/customapp_bar.dart';
 import '../alerts_page.dart';
 import '../home_page.dart';
-import '../map_page.dart';
+import '../map/map_page.dart';
 import '../profile/profile_page.dart';
 import '../scheduled_page.dart';
 import 'councellor_profile.dart';

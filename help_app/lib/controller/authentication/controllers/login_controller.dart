@@ -44,7 +44,7 @@ class LoginController extends GetxController {
   }
 
 //Register Function
-  void loginUser(String email, String password) {
+  loginUser(String email, String password) {
     AuthenticationRepository.instance
         .loginUserWithEmailAndPassword(email, password);
   }

@@ -17,7 +17,7 @@ import '../widgets/customapp_bar.dart';
 import '../widgets/drawer/nav_drawer.dart';
 import 'alerts_page.dart';
 import 'favorite_page.dart';
-import 'map_page.dart';
+import 'map/map_page.dart';
 
 class HomePage extends StatefulWidget {
   final String address;

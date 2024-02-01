@@ -41,10 +41,10 @@ class SignUpController extends GetxController {
       } else {
         await userRepo.createUser(user);
 
-        Get.to(() => ProfilePage());
+        // Get.to(() => ProfilePage());
       }
     } catch (error) {
-      print('Error creating/updating user profile: $error');
+      print('Error creating user $error');
     }
   }
 
