@@ -4,7 +4,6 @@ import 'package:help_app/constants/color_constants.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 import 'package:text_divider/text_divider.dart';
 import '../../controller/authentication/controllers/login_controller.dart';
-import '../home_main.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {

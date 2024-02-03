@@ -7,17 +7,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:help_app/constants/color_constants.dart';
-import 'package:help_app/view/home_page.dart';
 import 'package:help_app/view/profile/profile_page.dart';
-import 'package:help_app/view/scheduled_page.dart';
+import 'package:help_app/view/councellors/scheduled_page.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/customapp_bar.dart';
-import '../widgets/drawer/nav_drawer.dart';
-import 'alerts_page.dart';
-import 'favorite_page.dart';
-import 'map/map_page.dart';
+import '../../widgets/customapp_bar.dart';
+import '../../widgets/drawer/nav_drawer.dart';
+import '../alerts_page.dart';
+import '../map/map_page.dart';
+import 'home_page.dart';
 
 class HomePage extends StatefulWidget {
   final String address;

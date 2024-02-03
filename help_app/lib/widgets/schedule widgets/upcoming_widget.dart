@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:help_app/constants/color_constants.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../../view/alerts_page.dart';
 
 class UpcomingWidget extends StatefulWidget {
   const UpcomingWidget({super.key});
@@ -126,14 +129,271 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          showDialog(
+                            barrierDismissible: true,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(10.0),
+                                    bottom: Radius.circular(10),
+                                  ),
+                                ),
+                                actionsPadding: EdgeInsets.symmetric(),
+                                actions: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      const ListTile(
+                                        title: Text(
+                                          "REQUEST FOR PICKUP",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                            "Schedule your request, 10% off"),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10.0),
+                                              child: Container(
+                                                width: 260,
+                                                height: 60,
+                                                //padding: const EdgeInsets.symmetric(vertical: 15),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: const Color.fromARGB(
+                                                      255, 232, 231, 231),
+                                                  boxShadow: const [
+                                                    BoxShadow(
+                                                      spreadRadius: 2,
+                                                      blurRadius: 10,
+                                                      color: Colors.black12,
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: const Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            "SELECT DATE AND TIME",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800,
+                                                              color:
+                                                                  primaryColor,
+                                                            ),
+                                                          ),
+                                                          Icon(
+                                                            CupertinoIcons
+                                                                .calendar,
+                                                            color:
+                                                                Colors.black54,
+                                                            size: 25,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "2024-02-03",
+                                                            style: TextStyle(
+                                                              fontSize: 10,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color:
+                                                                  primaryColor,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 15),
+                                      const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                CupertinoIcons.calendar,
+                                                color: Colors.black54,
+                                                size: 15,
+                                              ),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                "02/02/2024",
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                CupertinoIcons.clock,
+                                                color: Colors.black54,
+                                                size: 15,
+                                              ),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                "7:00 PM",
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15.0),
+                                        child: Divider(
+                                          thickness: 1,
+                                          height: 20,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10.0),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.location_pin,
+                                                size: 20, color: Colors.red),
+                                            Text(
+                                              "Dansoman Ave Maria, ST347",
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w800,
+                                                color: primaryColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 18),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Container(
+                                            width: 308,
+                                            height: 50,
+                                            //padding: const EdgeInsets.symmetric(vertical: 15),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: Colors.green,
+                                            ),
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.done,
+                                                    color: Colors.white),
+                                                const SizedBox(width: 5),
+                                                Text(
+                                                  "Complete Request",
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 13),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Container(
+                                            width: 308,
+                                            height: 50,
+                                            //padding: const EdgeInsets.symmetric(vertical: 15),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: Colors.red,
+                                            ),
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.cancel,
+                                                    color: Colors.white),
+                                                const SizedBox(width: 5),
+                                                Text(
+                                                  "Cancel Request",
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 15),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
                         child: Container(
                           width: 120,
                           height: 40,
                           //padding: const EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Color.fromARGB(255, 232, 231, 231),
+                            color: const Color.fromARGB(255, 232, 231, 231),
                           ),
                           child: const Center(
                             child: Text(
@@ -291,7 +551,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                           //padding: const EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Color.fromARGB(255, 232, 231, 231),
+                            color: const Color.fromARGB(255, 232, 231, 231),
                           ),
                           child: const Center(
                             child: Text(
@@ -306,7 +566,9 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const AlertPage());
+                        },
                         child: Container(
                           width: 120,
                           height: 40,
@@ -449,7 +711,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                           //padding: const EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Color.fromARGB(255, 232, 231, 231),
+                            color: const Color.fromARGB(255, 232, 231, 231),
                           ),
                           child: const Center(
                             child: Text(

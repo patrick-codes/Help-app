@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:help_app/view/home_main.dart';
 import '../../../constants/color_constants.dart';
 import '../../registration/login_screen.dart';
 import 'models/onboarding_model.dart';

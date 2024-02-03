@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:help_app/view/home_main.dart';
+import '../../../view/home/home_main.dart';
 import '../repository/authentication_repository.dart';
 
 class OTPController extends GetxController {

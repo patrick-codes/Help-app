@@ -128,20 +128,6 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*floatingActionButton: Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-          color: primaryColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: const Icon(
-          LineIcons.locationArrow,
-          color: tertiaryColor,
-          size: 30,
-        ),
-      ),
-      */
       body: Stack(
         children: [
           Center(
@@ -158,9 +144,11 @@ class _MapPageState extends State<MapPage> {
                   userAgentPackageName: 'com.example.app',
                 ),
                 MarkerLayer(
+                  alignment: Alignment.center,
                   markers: [
                     Marker(
-                      point: const LatLng(5.5768149, -0.3266899),
+                      point: initialCenter,
+                      //const LatLng(5.5768149, -0.3266899),
                       child: Builder(
                         builder: (BuildContext context) {
                           return GestureDetector(

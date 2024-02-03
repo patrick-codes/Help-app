@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_app/constants/color_constants.dart';
-
-import '../model/news_model.dart';
-import '../widgets/grid_items.dart';
-import 'scheduled_page.dart';
+import '../../model/news_model.dart';
+import '../../widgets/grid_items.dart';
+import '../councellors/scheduled_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

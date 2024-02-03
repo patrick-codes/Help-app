@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:help_app/constants/color_constants.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../widgets/sample_chat.dart';
+import '../../widgets/sample_chat.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});

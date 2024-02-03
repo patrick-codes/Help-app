@@ -4,11 +4,11 @@ import 'package:help_app/constants/color_constants.dart';
 import 'package:help_app/model/news_model.dart';
 import 'package:help_app/view/alerts_page.dart';
 import 'package:help_app/view/card%20details/card_details.dart';
-import 'package:help_app/view/chat_page.dart';
+import 'package:help_app/view/chat/chat_page.dart';
 import 'package:help_app/view/councellors/councellors_page.dart';
 import 'package:help_app/view/favorite_page.dart';
 import '../view/registration/login_screen.dart';
-import '../view/scheduled_page.dart';
+import '../view/councellors/scheduled_page.dart';
 
 class GridItems extends StatelessWidget {
   GridItems({super.key});
