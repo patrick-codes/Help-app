@@ -36,8 +36,9 @@ class _MapPageState extends State<MapPage> {
   String currentStreet = '';
   double? distanceInMeters = 0.0;
   double? distanceInKm = 0.0;
-  late double userLatitude;
-  late double userLongitude;
+  double userLatitude = 0.0;
+  double userLongitude = 0.0;
+  LatLng? coordinates;
 
   void _showAlertBanner(
     String message,
@@ -113,16 +114,17 @@ class _MapPageState extends State<MapPage> {
 
   LatLng initialCenter = const LatLng(0.0, 0.0);
 
-  Future<void> _updateMapCenter() async {
-    LatLng? coordinates = await _addressFromCoordinates();
+  Future<Position?> _updateMapCenter() async {
+    coordinates = await _addressFromCoordinates();
 
     if (coordinates != null) {
       setState(() async {
-        initialCenter = coordinates;
+        initialCenter = coordinates!;
       });
     } else {
       print("Error occurred while getting coordinates");
     }
+    return null;
   }
 
   @override
@@ -134,7 +136,7 @@ class _MapPageState extends State<MapPage> {
             child: FlutterMap(
               options: MapOptions(
                 keepAlive: true,
-                //5.5768149, -0.3266899
+                // 5.7931065, -0.7893054
                 initialCenter: initialCenter,
                 initialZoom: 5.0,
               ),
@@ -147,8 +149,9 @@ class _MapPageState extends State<MapPage> {
                   alignment: Alignment.center,
                   markers: [
                     Marker(
-                      point: initialCenter,
-                      //const LatLng(5.5768149, -0.3266899),
+                      point: // initialCenter,
+                          //const LatLng(5.7931065, -0.7893054),
+                          LatLng(userLatitude, userLongitude),
                       child: Builder(
                         builder: (BuildContext context) {
                           return GestureDetector(

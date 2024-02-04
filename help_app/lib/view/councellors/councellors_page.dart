@@ -262,39 +262,44 @@ class _CouncellorsPageState extends State<CouncellorsPage> {
           ],
         ),
       ),
-      bottomSheet: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        width: 330,
-        height: 55,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: primaryColor,
-          boxShadow: const [
-            BoxShadow(
-              spreadRadius: 2,
-              blurRadius: 10,
-              color: Colors.black12,
-            ),
-          ],
-        ),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.phone,
-              size: 24,
-              color: tertiaryColor,
-            ),
-            SizedBox(width: 7),
-            Text(
-              "CREATE PANIC CALL NOW",
-              style: TextStyle(
-                fontSize: 15,
-                color: tertiaryColor,
-                fontWeight: FontWeight.bold,
+      bottomSheet: GestureDetector(
+        onTap: () {
+          Get.to(() => const MapPage());
+        },
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          width: 330,
+          height: 55,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: primaryColor,
+            boxShadow: const [
+              BoxShadow(
+                spreadRadius: 2,
+                blurRadius: 10,
+                color: Colors.black12,
               ),
-            ),
-          ],
+            ],
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.phone,
+                size: 24,
+                color: tertiaryColor,
+              ),
+              SizedBox(width: 7),
+              Text(
+                "CREATE PANIC CALL NOW",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: tertiaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

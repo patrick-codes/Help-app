@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:help_app/constants/color_constants.dart';
+import 'package:help_app/widgets/schedule%20widgets/cancelled_widget.dart';
 import 'package:help_app/widgets/schedule%20widgets/upcoming_widget.dart';
+
+import '../../widgets/schedule widgets/completed_widget.dart';
 
 class SchedulePage extends StatefulWidget {
   SchedulePage({super.key});
@@ -15,8 +18,8 @@ class _SchedulePageState extends State<SchedulePage> {
 
   final List _scheduleWidgets = [
     const UpcomingWidget(),
-    Container(),
-    Container(),
+    const CompletedSchedulePage(),
+    const CancelledSchedulePage(),
   ];
 
   @override

@@ -337,8 +337,8 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
                   Text(
                     "GHC 250",
                     style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 17,
+                      color: Colors.red,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
