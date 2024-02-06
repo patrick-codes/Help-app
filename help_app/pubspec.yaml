@@ -65,6 +65,7 @@ dependencies:
   firebase_core: ^2.24.2
   cloud_firestore: ^4.14.0
   google_sign_in: ^6.1.6
+  flutter_map_tappable_polyline: ^6.0.0
 
 
 

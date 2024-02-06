@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -9,6 +11,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../constants/color_constants.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 
 class MapPage extends StatefulWidget {
@@ -24,8 +27,15 @@ class _MapPageState extends State<MapPage> {
     super.initState();
     _loadLocation();
     _updateMapCenter();
+    getDirections();
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 
+  bool isLoading = true;
   String locationMessage = 'Current Location of user';
   late bool serviceEnabled = false;
   late LocationPermission permission;
@@ -127,6 +137,53 @@ class _MapPageState extends State<MapPage> {
     return null;
   }
 
+  LatLng points = const LatLng(7.33991, -2.32676);
+  List<LatLng> polylinePoints = [];
+  Future<void> getDirections() async {
+    try {
+      String apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+      String osrmUrl = 'https://router.project-osrm.org/route/v1/driving/';
+
+      // Replace with your actual coordinates
+      String startLongitude = userLongitude.toString();
+      String startLatitude = userLatitude.toString();
+      String endLongitude = points.longitude.toString();
+      String endLatitude = points.latitude.toString();
+
+      String apiUrl =
+          '$osrmUrl$startLongitude,$startLatitude;$endLongitude,$endLatitude?geometries=geojson&overview=full&steps=true&annotations=true&continue_straight=true';
+
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final decodedData = json.decode(response.body);
+
+        // Extract polyline points from the OSRM API response
+        List<dynamic> coordinates =
+            decodedData['routes'][0]['geometry']['coordinates'];
+
+        // Clear existing polyline points
+        polylinePoints.clear();
+
+        for (var coord in coordinates) {
+          double lat = coord[1];
+          double lon = coord[0];
+          polylinePoints.add(LatLng(lat, lon));
+        }
+
+        setState(() {});
+      } else {
+        print('Failed to load directions: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to load directions');
+      }
+    } catch (error, stackTrace) {
+      print('Error: $error');
+      print('Stack trace: $stackTrace');
+      throw Exception('Failed to load directions');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,12 +195,25 @@ class _MapPageState extends State<MapPage> {
                 keepAlive: true,
                 // 5.7931065, -0.7893054
                 initialCenter: initialCenter,
-                initialZoom: 5.0,
+                initialZoom: 6.0,
               ),
               children: [
                 TileLayer(
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName: 'com.example.app',
+                ),
+                PolylineLayer(
+                  polylines: [
+                    Polyline(
+                      strokeCap: StrokeCap.round,
+                      points: [
+                        LatLng(userLatitude, userLongitude),
+                        const LatLng(7.33991, -2.32676),
+                      ],
+                      strokeWidth: 4,
+                      color: Colors.blue,
+                    ),
+                  ],
                 ),
                 MarkerLayer(
                   alignment: Alignment.center,
@@ -276,12 +346,152 @@ class _MapPageState extends State<MapPage> {
                                   )
                                 ],
                                 shape: BoxShape.circle,
-                                color: primaryColor,
+                                color: Colors.red,
                               ),
                               child: const Icon(
-                                Icons.location_pin,
-                                size: 18,
-                                color: Colors.red,
+                                Icons.person_pin,
+                                size: 23,
+                                color: Colors.white,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Marker(
+                      point: // initialCenter,
+                          //const LatLng(5.7931065, -0.7893054),
+                          const LatLng(7.33991, -2.32676),
+                      child: Builder(
+                        builder: (BuildContext context) {
+                          return GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(8.0),
+                                        bottom: Radius.circular(8),
+                                      ),
+                                    ),
+                                    actions: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          ListTile(
+                                            leading: const CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  "assets/images/img2.png"),
+                                            ),
+                                            title: const Text(
+                                              "Sandra Smith",
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                            subtitle: Row(
+                                              children: [
+                                                Text(
+                                                  placeLoc,
+                                                  style: const TextStyle(
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 2),
+                                                Text(
+                                                  placeAdm,
+                                                  style: const TextStyle(
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            trailing: const Text("24 years"),
+                                          ),
+                                          const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons
+                                                        .favorite_outline_rounded,
+                                                    size: 13,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Text(
+                                                    "Married",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 10),
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.work_history_outlined,
+                                                    size: 13,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Text(
+                                                    "Nurse",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 10),
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.people_alt_outlined,
+                                                    size: 13,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Text(
+                                                    "3 Children",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 3),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    spreadRadius: 1.5,
+                                    blurRadius: 2,
+                                  )
+                                ],
+                                shape: BoxShape.circle,
+                                color: Colors.green,
+                              ),
+                              child: const Icon(
+                                Icons.person_pin,
+                                size: 23,
+                                color: Colors.white,
                               ),
                             ),
                           );
@@ -301,7 +511,13 @@ class _MapPageState extends State<MapPage> {
                 ),
               ],
             ),
+
+            // Loading indicator overlay
           ),
+          if (isLoading)
+            Center(
+              child: CircularProgressIndicator(),
+            ),
           Positioned(
             left: 20,
             bottom: 20,
