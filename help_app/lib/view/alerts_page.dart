@@ -38,7 +38,6 @@ class AlertPage extends StatelessWidget {
           ),
         ],
       ),
-      //backgroundColor: Co,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(

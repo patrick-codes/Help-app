@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -11,7 +9,6 @@ import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../constants/color_constants.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 
 class MapPage extends StatefulWidget {
@@ -27,7 +24,6 @@ class _MapPageState extends State<MapPage> {
     super.initState();
     _loadLocation();
     _updateMapCenter();
-    getDirections();
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
@@ -137,53 +133,9 @@ class _MapPageState extends State<MapPage> {
     return null;
   }
 
-  LatLng points = const LatLng(7.33991, -2.32676);
-  List<LatLng> polylinePoints = [];
-  Future<void> getDirections() async {
-    try {
-      String apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
-      String osrmUrl = 'https://router.project-osrm.org/route/v1/driving/';
-
-      // Replace with your actual coordinates
-      String startLongitude = userLongitude.toString();
-      String startLatitude = userLatitude.toString();
-      String endLongitude = points.longitude.toString();
-      String endLatitude = points.latitude.toString();
-
-      String apiUrl =
-          '$osrmUrl$startLongitude,$startLatitude;$endLongitude,$endLatitude?geometries=geojson&overview=full&steps=true&annotations=true&continue_straight=true';
-
-      final response = await http.get(Uri.parse(apiUrl));
-
-      if (response.statusCode == 200) {
-        final decodedData = json.decode(response.body);
-
-        // Extract polyline points from the OSRM API response
-        List<dynamic> coordinates =
-            decodedData['routes'][0]['geometry']['coordinates'];
-
-        // Clear existing polyline points
-        polylinePoints.clear();
-
-        for (var coord in coordinates) {
-          double lat = coord[1];
-          double lon = coord[0];
-          polylinePoints.add(LatLng(lat, lon));
-        }
-
-        setState(() {});
-      } else {
-        print('Failed to load directions: ${response.statusCode}');
-        print('Response body: ${response.body}');
-        throw Exception('Failed to load directions');
-      }
-    } catch (error, stackTrace) {
-      print('Error: $error');
-      print('Stack trace: $stackTrace');
-      throw Exception('Failed to load directions');
-    }
-  }
-
+  List<LatLng> points = [
+    const LatLng(37.7749, -122.4194),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,7 +147,7 @@ class _MapPageState extends State<MapPage> {
                 keepAlive: true,
                 // 5.7931065, -0.7893054
                 initialCenter: initialCenter,
-                initialZoom: 6.0,
+                initialZoom: 10.0,
               ),
               children: [
                 TileLayer(

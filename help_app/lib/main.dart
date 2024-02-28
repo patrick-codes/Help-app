@@ -26,26 +26,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-/*void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationRepository()));
-
-  //await Firebase.initializeApp();
-  //await controller.initNotification();
-  // Only call clearSavedSettings() during testing to reset internal values.
-  //await Upgrader.clearSavedSettings(); // REMOVE this for release builds
-
-  runApp(const MyApp());
-}
-*/
-/*Future<void> main() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const MyApp());
-}
-*/
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
