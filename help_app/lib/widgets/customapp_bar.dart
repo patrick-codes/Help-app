@@ -15,8 +15,9 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return AppBar(
-      scrolledUnderElevation: 1,
-      elevation: 1,
+      scrolledUnderElevation: 2,
+      shadowColor: primaryColor,
+      elevation: 4,
       centerTitle: true,
       automaticallyImplyLeading: false,
       iconTheme: const IconThemeData(
@@ -54,48 +55,40 @@ class CustomAppBar extends StatelessWidget {
           SizedBox(
             width: (size.width - (20 + 60)),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.location_pin,
-                  size: 18,
-                  color: tertiaryColor,
-                ),
-                Text(
-                  overflow: TextOverflow.ellipsis,
-                  address,
-                  //"Weija Gbawe Accra, Djaman Street 234",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: secondaryColor,
+                const Padding(
+                  padding: EdgeInsets.symmetric(),
+                  child: Icon(
+                    Icons.location_pin,
+                    size: 18,
+                    color: tertiaryColor,
                   ),
                 ),
+                if (address != null)
+                  Text(
+                    overflow: TextOverflow.ellipsis,
+                    address,
+                    //"Weija Gbawe Accra, Djaman Street 234",
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: secondaryColor,
+                    ),
+                  )
+                else if (address == null && address.isEmpty)
+                  const Text(
+                    overflow: TextOverflow.ellipsis,
+                    "Location loading...",
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: secondaryColor,
+                    ),
+                  ),
               ],
             ),
           ),
         ],
       ),
-
-      /* SizedBox(
-            width: (size.width - (20 + 60)),
-            child: const Row(
-              children: [
-                Icon(
-                  Icons.location_pin,
-                  size: 18,
-                  color: tertiaryColor,
-                ),
-                Text(
-                  overflow: TextOverflow.ellipsis,
-                  "Weija Gbawe Accra, Djaman Street 234",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: secondaryColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        */
     );
   }
 }

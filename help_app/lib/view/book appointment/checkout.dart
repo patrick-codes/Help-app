@@ -7,10 +7,8 @@ import 'package:help_app/constants/color_constants.dart';
 import 'package:help_app/view/chat/chat_page.dart';
 
 import '../../model/councellor/councellor_model_testing.dart';
-import '../book appointment/checkout.dart';
-import '../book appointment/succes_checkout.dart';
 
-class CouncellorProfile extends StatefulWidget {
+class CheckoutPage extends StatefulWidget {
   String? name;
   String? profession;
   String? location;
@@ -19,7 +17,7 @@ class CouncellorProfile extends StatefulWidget {
   String? about;
   int? review;
 
-  CouncellorProfile(
+  CheckoutPage(
       {required this.name,
       required this.profession,
       required this.location,
@@ -30,10 +28,10 @@ class CouncellorProfile extends StatefulWidget {
       super.key});
 
   @override
-  State<CouncellorProfile> createState() => _CouncellorProfileState();
+  State<CheckoutPage> createState() => _CheckoutPageState();
 }
 
-class _CouncellorProfileState extends State<CouncellorProfile> {
+class _CheckoutPageState extends State<CheckoutPage> {
   final List imgs = [
     "img1.png",
     "img2.png",
@@ -46,11 +44,6 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
   ];
 
   String price = "300";
-  int randomOne = 0;
-  int randomTwo = 0;
-  int randomThree = 0;
-  int randomFour = 0;
-  String? transactionId = '0000';
 
   List<Icon> icon = [
     const Icon(Icons.star, color: Colors.amber, size: 16),
@@ -62,36 +55,6 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
       return icon;
     }
     return icon;
-  }
-
-//Transaction id generator
-  void randomCode(randomOne, randomTwo, randomThree, randomFour) {
-    try {
-      Random rand = Random();
-      Random rand2 = Random();
-      Random rand3 = Random();
-      Random rand4 = Random();
-
-      setState(() {
-        randomOne = rand.nextInt(10);
-        randomTwo = rand.nextInt(10);
-        randomThree = rand.nextInt(10);
-        randomFour = rand.nextInt(10);
-
-        for (int i = 0; i <= randomOne; i++) {
-          transactionId = 'TRS$randomOne$randomTwo$randomThree$randomFour';
-          print('Transaction ID: ${transactionId}');
-        }
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  @override
-  void initState() {
-    randomCode(randomOne, randomTwo, randomThree, randomFour);
-    super.initState();
   }
 
   @override
@@ -435,7 +398,7 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
               onTap: () {
                 // _displayBottomSheet(context, price);
                 showDialog(
-                  barrierDismissible: false,
+                  barrierDismissible: true,
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
@@ -451,154 +414,152 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 15),
-                            const Icon(
-                              Icons.check_circle,
-                              size: 75,
-                              color: Colors.green,
-                            ),
-                            const Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: Text(
-                                "Confirm Appointment",
+                            const ListTile(
+                              title: Text(
+                                "From GHC 64/person",
                                 style: TextStyle(
-                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                              subtitle: Text("Book for 2 quests, 10% off"),
                             ),
-                            const SizedBox(height: 10),
-                            const Text(
-                              "You are booking an appointment with",
-                              style: TextStyle(
-                                fontSize: 12,
-                              ),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              "Dr. ${widget.name}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    strokeAlign: BorderSide.strokeAlignOutside,
-                                    width: 1,
-                                    color: Colors.grey,
-                                  ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(),
-                                            child: Text("Profession:"),
+                            const SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Container(
+                                      width: 260,
+                                      height: 60,
+                                      //padding: const EdgeInsets.symmetric(vertical: 15),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: const Color.fromARGB(
+                                            255, 232, 231, 231),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            spreadRadius: 2,
+                                            blurRadius: 10,
+                                            color: Colors.black12,
                                           ),
-                                          const SizedBox(
-                                            width: 9,
-                                          ),
-                                          Text("${widget.profession}"),
                                         ],
                                       ),
-                                      const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(),
-                                            child: Text("Date:"),
-                                          ),
-                                          SizedBox(width: 44),
-                                          Text(" 24/02/24")
-                                        ],
-                                      ),
-                                      const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(),
-                                            child: Text("Time:"),
-                                          ),
-                                          SizedBox(width: 44),
-                                          Text("3:45 PM")
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(),
-                                            child: Text("Location:"),
-                                          ),
-                                          const SizedBox(width: 23),
-                                          Text("${widget.location}"),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(),
-                                            child: Text(
-                                              "Fee:",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "SELECT DATE AND TIME",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w800,
+                                                    color: primaryColor,
+                                                  ),
+                                                ),
+                                                Icon(Icons
+                                                    .arrow_drop_down_sharp),
+                                              ],
                                             ),
-                                          ),
-                                          const SizedBox(width: 57),
-                                          Text(
-                                            "GHC ${widget.fee}",
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "2024-02-03",
+                                                  style: TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: primaryColor,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
+                              ],
+                            ),
+                            const SizedBox(height: 15),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.black54,
+                                      size: 15,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "02/02/2024",
+                                      style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      CupertinoIcons.clock,
+                                      color: Colors.black54,
+                                      size: 15,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "7:00 PM",
+                                      style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Divider(
+                                thickness: 1,
+                                height: 20,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.location_pin,
+                                      size: 20, color: Colors.red),
+                                  Text(
+                                    "Pickup Location",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w800,
+                                      color: primaryColor,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             const SizedBox(height: 18),
                             GestureDetector(
-                              onTap: () {
-                                Get.to(() => SuccesPage(
-                                      transactionId: transactionId,
-                                    ));
-                                Get.snackbar(
-                                  snackStyle: SnackStyle.FLOATING,
-                                  margin: EdgeInsets.all(10),
-                                  padding: EdgeInsets.only(bottom: 10, top: 10),
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  borderRadius: 10,
-                                  backgroundColor: Colors.green,
-                                  icon: Icon(
-                                    Icons.cancel,
-                                    color: Colors.white,
-                                  ),
-                                  duration: Duration(seconds: 5),
-                                  colorText: Colors.white,
-                                  'Appointment Booked!!',
-                                  'You have booked an appointment with ${widget.name}',
-                                );
-                              },
+                              onTap: () {},
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -613,8 +574,10 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
                                   child: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      Icon(Icons.done, color: Colors.white),
+                                      const SizedBox(width: 5),
                                       Text(
-                                        "Book Appointment",
+                                        "Complete Request",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -626,25 +589,9 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15),
+                            const SizedBox(height: 13),
                             GestureDetector(
-                              onTap: () {
-                                Get.back();
-                                Get.snackbar(
-                                  margin: EdgeInsets.all(10),
-                                  padding: EdgeInsets.only(bottom: 10, top: 10),
-                                  borderRadius: 10,
-                                  backgroundColor: Colors.red,
-                                  icon: Icon(
-                                    Icons.cancel,
-                                    color: Colors.white,
-                                  ),
-                                  duration: Duration(seconds: 5),
-                                  colorText: Colors.white,
-                                  'Cancelled Appointment !!',
-                                  'You cancelled your appointment with ${widget.name}',
-                                );
-                              },
+                              onTap: () {},
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -659,8 +606,10 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
                                   child: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      Icon(Icons.cancel, color: Colors.white),
+                                      const SizedBox(width: 5),
                                       Text(
-                                        "Cancel Appointment",
+                                        "Cancel Request",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -672,7 +621,7 @@ class _CouncellorProfileState extends State<CouncellorProfile> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 15),
                           ],
                         ),
                       ],

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:help_app/view/councellors/scheduled_page.dart';
 import 'package:line_icons/line_icons.dart';
-
 import '../../constants/color_constants.dart';
 import '../../controller/authentication/repository/authentication_repository.dart';
 
@@ -12,30 +13,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        backgroundColor: primaryColor,
-        iconTheme: const IconThemeData(
-          color: secondaryColor,
-        ),
-        title: const Text(
-          "Settings",
-          style: TextStyle(
-            color: secondaryColor,
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(top: 8.0, right: 10),
-            child: Icon(
-              Icons.more_vert,
-              size: 25,
-            ),
-          ),
-        ],
-      ),
-      */
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
@@ -45,47 +22,70 @@ class ProfilePage extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: ListTile(
+                  //isThreeLine: true,
+                  contentPadding: EdgeInsets.symmetric(),
                   leading: CircleAvatar(
+                    backgroundColor: Colors.greenAccent,
                     radius: 30,
-                    backgroundImage: AssetImage(
-                      "assets/images/img4.png",
+                    child: Icon(
+                      Icons.person,
+                      size: 35,
                     ),
                   ),
                   title: Text(
-                    "Dr. John Smith",
+                    "Peter Kwabena Boateng",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  subtitle: Text(
-                    "Profile",
-                    style: TextStyle(
-                      fontSize: 13,
-                    ),
+                  subtitle: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "(+233) 0245513607",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        "Profile",
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              const Divider(
-                thickness: 0.5,
-                indent: 0.5,
-                color: Colors.grey,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Divider(
+                  thickness: 1,
+                  height: 20,
+                ),
               ),
               const SizedBox(height: 15),
               ListTile(
+                onTap: () {},
                 leading: Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: secondaryColor,
+                    color: Colors.green,
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Icon(
-                      CupertinoIcons.person,
+                      CupertinoIcons.pen,
+                      color: Colors.white,
                     ),
                   ),
                 ),
                 title: const Text(
-                  "Profile",
+                  "Edit Profile",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -101,12 +101,13 @@ class ProfilePage extends StatelessWidget {
                 leading: Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: secondaryColor,
+                    color: Colors.green,
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Icon(
                       CupertinoIcons.bell,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -127,17 +128,48 @@ class ProfilePage extends StatelessWidget {
                 leading: Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: secondaryColor,
+                    color: Colors.green,
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Icon(
-                      Icons.privacy_tip_outlined,
+                      Icons.fire_truck_outlined,
+                      color: Colors.white,
                     ),
                   ),
                 ),
                 title: const Text(
-                  "Privacy",
+                  "My requests",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 18,
+                ),
+              ),
+              const SizedBox(height: 5),
+              ListTile(
+                onTap: () {
+                  Get.to(() => SchedulePage());
+                },
+                leading: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green,
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Icon(
+                      Icons.list_alt,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                title: const Text(
+                  "My schedules",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -153,17 +185,18 @@ class ProfilePage extends StatelessWidget {
                 leading: Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: secondaryColor,
+                    color: Colors.green,
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Icon(
-                      Icons.settings_suggest_outlined,
+                      CupertinoIcons.location_solid,
+                      color: Colors.white,
                     ),
                   ),
                 ),
                 title: const Text(
-                  "General",
+                  "Pickup address",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -174,93 +207,80 @@ class ProfilePage extends StatelessWidget {
                   size: 18,
                 ),
               ),
-              const SizedBox(height: 5),
-              ListTile(
-                leading: Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: secondaryColor,
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(
-                      CupertinoIcons.info,
-                    ),
-                  ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Divider(
+                  thickness: 1,
+                  height: 20,
                 ),
-                title: const Text(
-                  "About us",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 18,
-                ),
-              ),
-              const Divider(
-                height: 40,
-                thickness: 0.5,
-                indent: 0.5,
-                color: Colors.grey,
               ),
               ListTile(
                 onTap: () {
                   showDialog(
-                    barrierDismissible: false,
+                    barrierDismissible: true,
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
+                        backgroundColor: Colors.white,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(10.0),
                             bottom: Radius.circular(10),
                           ),
                         ),
-                        title: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Confirm logout',
-                              style: TextStyle(
-                                color: primaryColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        content: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Are you sure you want to logout?'),
-                          ],
-                        ),
                         actions: [
-                          Row(
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TextButton(
-                                child: const Text(
-                                  'Cancel',
-                                  style: TextStyle(
-                                    color: primaryColor,
-                                  ),
+                              const SizedBox(height: 15),
+                              const Text(
+                                "Confirm logout",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
                                 ),
-                                onPressed: () {
-                                  Get.back();
-                                },
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  AuthenticationRepository.instance.logout();
-                                },
-                                child: const Text(
-                                  'Logout',
-                                  style: TextStyle(
-                                    color: primaryColor,
+                              const SizedBox(height: 5),
+                              const Text("Are you sure you want to logout?"),
+                              const SizedBox(height: 25),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: MaterialButton(
+                                      onPressed: () {
+                                        AuthenticationRepository.instance
+                                            .logout();
+                                      },
+                                      color: Colors.green,
+                                      child: const Text(
+                                        "Logout",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: MaterialButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      color: Colors.red,
+                                      child: const Text(
+                                        "Cancel",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -299,7 +319,7 @@ class ProfilePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "HappyHelp v1.1",
+                      "BorlaGh v1.1",
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey,

@@ -6,7 +6,9 @@ import 'package:line_icons/line_icons.dart';
 import '../../widgets/sample_chat.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  String? name;
+
+  ChatPage({this.name, super.key});
 
   @override
   State<ChatPage> createState() => _ChatPageState();

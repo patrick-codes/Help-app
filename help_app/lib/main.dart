@@ -15,13 +15,11 @@ void main() async {
       .then((value) => Get.put(AuthenticationRepository()));
 
   print("Firebase initialized successfully.");
-
   Get.put(AuthenticationRepository());
 
-  print("Initializing notifications...");
+  //print("Initializing notifications...");
   //await controller.initNotification();
-  print("Notifications initialized successfully.");
-
+  //print("Notifications initialized successfully.");
   //await Upgrader.clearSavedSettings();
   runApp(const MyApp());
 }
@@ -54,8 +52,8 @@ class MyApp extends StatelessWidget {
               activeColor: Colors.white,
               inactiveColor: secondaryColor,
               tickCount: 24,
-              relativeWidth: 0.4,
-              radius: 18,
+              relativeWidth: 0.2,
+              radius: 15,
               startRatio: 0.7,
               animationDuration: Duration(milliseconds: 500),
             ),

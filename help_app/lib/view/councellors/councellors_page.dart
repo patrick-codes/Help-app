@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:help_app/view/chat/chat_page.dart';
+import 'package:help_app/model/councellor/councellor_model_testing.dart';
 import '../../constants/color_constants.dart';
 import '../alerts_page.dart';
 import '../home/home_page.dart';
@@ -80,7 +80,7 @@ class _CouncellorsPageState extends State<CouncellorsPage> {
               child: Container(
                 // padding: const EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(5),
                   color: Colors.white,
                   boxShadow: const [
                     BoxShadow(
@@ -91,15 +91,19 @@ class _CouncellorsPageState extends State<CouncellorsPage> {
                   ],
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
                       width: 300,
                       height: 50,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: TextFormField(
                           decoration: const InputDecoration(
+                            prefixIcon: Icon(
+                              CupertinoIcons.search,
+                              color: primaryColor,
+                              size: 20,
+                            ),
                             hintText: 'Search',
                             hintStyle: TextStyle(
                               color: Colors.black54,
@@ -110,149 +114,142 @@ class _CouncellorsPageState extends State<CouncellorsPage> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: const Icon(
-                        CupertinoIcons.search,
-                        color: primaryColor,
-                        size: 20,
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 5),
             const Padding(
               padding: EdgeInsets.only(left: 10.0, right: 10.0),
               child: Divider(
-                height: 1,
+                height: 15,
                 thickness: 0.5,
               ),
             ),
             const SizedBox(height: 5),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "Active Now",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: SizedBox(
-                height: 90,
-                child: ListView.builder(
-                  itemCount: 8,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Get.to(() => const ChatPage());
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 6),
-                        width: 55,
-                        height: 55,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          textDirection: TextDirection.rtl,
-                          children: [
-                            Center(
-                              child: SizedBox(
-                                width: 55,
-                                height: 55,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Image.asset(
-                                    "assets/images/${imgs[index]}",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(right: 1, top: 13),
-                              padding: const EdgeInsets.all(3),
-                              height: 15,
-                              width: 15,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.green,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
-                          ],
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                height: 30,
+                width: 250,
+                decoration: BoxDecoration(
+                  color: secondaryColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      const Text(
+                        "All Councellors & Pyschologist",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        "(${councellorDetails.length})",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
                         ),
                       ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              child: Divider(
-                height: 1,
-                thickness: 0.5,
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "All Councellors & Pyschologist",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 3),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 8,
+              itemCount: councellorDetails.length,
               shrinkWrap: true,
-              itemBuilder: (context, index) {
+              itemBuilder: (BuildContext context, int index) {
+                TestingCouncellorModel? councellor = councellorDetails[index];
                 return ListTile(
                   onTap: () {
-                    Get.to(() => CouncellorProfile());
+                    Get.to(() => CouncellorProfile(
+                          name: councellor.fullName,
+                          profession: councellor.profession,
+                          location: councellor.address,
+                          fee: councellor.feeCharged,
+                          isVerified: councellor.isVerified,
+                          about: councellor.about,
+                          review: councellor!.review,
+                        ));
                   },
                   minVerticalPadding: 15,
-                  leading: CircleAvatar(
-                    radius: 25,
-                    backgroundImage: AssetImage("assets/images/${imgs[index]}"),
+                  leading: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 6),
+                    width: 55,
+                    height: 55,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          spreadRadius: 2,
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
+                    child: Stack(
+                      textDirection: TextDirection.rtl,
+                      children: [
+                        Center(
+                          child: SizedBox(
+                            width: 55,
+                            height: 55,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: Image.asset(
+                                "assets/images/${imgs[index]}",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(right: 2, top: 40),
+                          padding: const EdgeInsets.all(3),
+                          height: 15,
+                          width: 15,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.verified,
+                            color: councellor!.isVerified!
+                                ? Colors.green
+                                : Colors.grey,
+                            size: 10,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  title: const Text(
-                    "Dr. Owusu Ansah",
-                    style: TextStyle(
+                  title: Text(
+                    "Dr. ${councellor!.fullName}",
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  subtitle: const Text(
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    "Hello Dr, are you there?",
-                    style: TextStyle(
-                      color: Colors.black54,
-                    ),
+                  subtitle: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        councellor!.profession!,
+                        style: const TextStyle(
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ],
                   ),
-                  trailing: const Text(
-                    "3:30 PM",
-                    style: TextStyle(
+                  trailing: Text(
+                    "GHC ${councellor!.feeCharged}",
+                    style: const TextStyle(
+                      fontSize: 12,
                       color: Colors.black54,
                     ),
                   ),
@@ -262,7 +259,7 @@ class _CouncellorsPageState extends State<CouncellorsPage> {
           ],
         ),
       ),
-      bottomSheet: GestureDetector(
+      /*  bottomSheet: GestureDetector(
         onTap: () {
           Get.to(() => const MapPage());
         },
@@ -302,6 +299,7 @@ class _CouncellorsPageState extends State<CouncellorsPage> {
           ),
         ),
       ),
+    */
     );
   }
 }

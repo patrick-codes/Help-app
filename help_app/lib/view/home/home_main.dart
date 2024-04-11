@@ -7,14 +7,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:help_app/constants/color_constants.dart';
+import 'package:help_app/view/councellors/councellor_profile.dart';
 import 'package:help_app/view/profile/profile_page.dart';
 import 'package:help_app/view/councellors/scheduled_page.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../../model/councellor/councellor_model_testing.dart';
 import '../../widgets/customapp_bar.dart';
 import '../../widgets/drawer/nav_drawer.dart';
 import '../alerts_page.dart';
+import '../chat/chat_page.dart';
 import '../map/map_page.dart';
 import 'home_page.dart';
 
@@ -257,6 +259,16 @@ class _MyHomePageState extends State<HomePage> {
     ).show(context);
   }
 
+  final List imgs = [
+    "img1.png",
+    "img2.png",
+    "img3.png",
+    "img4.png",
+    "img1.png",
+    "img2.png",
+    "img3.png",
+    "img4.png",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -315,9 +327,116 @@ class _MyHomePageState extends State<HomePage> {
         ),
       ),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
-        child: CustomAppBar(
-          address: currentAddress,
+        preferredSize: const Size.fromHeight(137),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const CustomAppBar(
+              address: 'Accra, Gbawe',
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(),
+              child: Container(
+                color: primaryColor,
+                height: 80,
+                child: ListView.builder(
+                  itemCount: councellorDetails.length,
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    TestingCouncellorModel councellor =
+                        councellorDetails[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(() => CouncellorProfile(
+                              name: councellor.fullName,
+                              profession: councellor.profession,
+                              location: councellor.address,
+                              fee: councellor.feeCharged,
+                              isVerified: councellor.isVerified,
+                              about: councellor.about,
+                              review: councellor.review,
+                            ));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 6),
+                        width: 55,
+                        height: 55,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: primaryColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Stack(
+                          //textDirection: TextDirection.,
+                          children: [
+                            Positioned(
+                              height: 13,
+                              bottom: 0.5,
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  right: 14,
+                                  bottom: 2,
+                                  left: 5,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(),
+                                  child: Text(
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    councellor.fullName!,
+                                    style: const TextStyle(
+                                      fontSize: 8,
+                                      color: secondaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: SizedBox(
+                                width: 55,
+                                height: 55,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: Image.asset(
+                                    "assets/images/${imgs[index]}",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 40, top: 13),
+                              padding: const EdgeInsets.all(3),
+                              height: 13,
+                              width: 13,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       /*AppBar(

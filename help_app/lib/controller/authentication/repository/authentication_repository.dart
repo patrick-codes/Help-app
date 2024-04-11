@@ -26,8 +26,6 @@ class AuthenticationRepository extends GetxController {
     Future.delayed(const Duration(seconds: 5));
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
-    //FlutterNativeSplash.remove();
-    //setInitialScreen(firebaseUser.value);
     ever(firebaseUser, setInitialScreen);
   }
 
@@ -256,10 +254,6 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      /*if (!_auth.currentUser!.emailVerified) {
-        await sendEmailVerification();
-      } else if (_auth.currentUser!.emailVerified) {
-        */
       firebaseUser.value != null
           ? Get.offAll(() => const HomePage(
                 address: '',
@@ -289,18 +283,12 @@ class AuthenticationRepository extends GetxController {
       String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      /*if (!_auth.currentUser!.emailVerified) {
-      await sendEmailVerification();
-        Get.to(() => const LoginScreen());
-      } else */
-      //if (_auth.currentUser!.emailVerified) {
       firebaseUser.value != null
           ? Get.offAll(() => const HomePage(
                 address: '',
               ))
           //replace route with signupscreen later
           : Get.offAll(() => const SignupScreen());
-//}
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         'ERROR!!', e.code,

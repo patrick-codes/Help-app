@@ -1,60 +1,57 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:help_app/view/other/item_grid.dart';
 import '../constants/color_constants.dart';
 
-class AlertPage extends StatelessWidget {
+class AlertPage extends StatefulWidget {
   const AlertPage({super.key});
 
   @override
+  State<AlertPage> createState() => _AlertPageState();
+}
+
+class _AlertPageState extends State<AlertPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: secondaryColor,
-        ),
-        backgroundColor: primaryColor,
-        leadingWidth: 20,
-        title: const Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text(
-                "Complete Request",
-                style: TextStyle(
-                  color: secondaryColor,
-                  fontSize: 15,
-                ),
-              ),
-            ),
-          ],
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(top: 8.0, right: 10),
-            child: Icon(
-              Icons.more_vert,
-              size: 25,
-            ),
-          ),
-        ],
-      ),
-      body: Padding(
+    return DefaultTabController(
+      length: 4,
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Schedule your request",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const TabBar(
+              isScrollable: true,
+              // indicator: BoxDecoration(),
+              labelStyle: TextStyle(fontSize: 13),
+              indicatorColor: primaryColor,
+              labelPadding: EdgeInsets.symmetric(horizontal: 20),
+              tabs: [
+                Tab(text: 'Doctor'),
+                Tab(text: 'Nurse'),
+                Tab(text: 'Dentist'),
+                Tab(text: 'Optician'),
               ],
             ),
+            Flexible(
+                flex: 1,
+                child: TabBarView(
+                  children: [
+                    const ItemGridPage(),
+                    const ItemGridPage(),
+                    const ItemGridPage(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text("Optician"),
+                        ],
+                      ),
+                    ),
+                  ],
+                ))
+            /*
             const SizedBox(height: 15),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 5),
@@ -269,6 +266,7 @@ class AlertPage extends StatelessWidget {
                 ),
               ),
             ),
+          */
           ],
         ),
       ),

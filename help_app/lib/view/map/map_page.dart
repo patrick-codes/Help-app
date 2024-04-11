@@ -24,7 +24,7 @@ class _MapPageState extends State<MapPage> {
     super.initState();
     _loadLocation();
     _updateMapCenter();
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
       });
@@ -139,6 +139,113 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: GestureDetector(
+        onTap: () {
+          Get.to(() => const MapPage());
+        },
+        child:
+            /* Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          width: double.infinity,
+          height: 70,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: primaryColor,
+            boxShadow: const [
+              BoxShadow(
+                spreadRadius: 2,
+                blurRadius: 10,
+                color: Colors.black12,
+              ),
+            ],
+          ),
+          child:*/
+            Container(
+          width: double.infinity,
+          height: 175,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+                    child: Text(
+                      "Sakaman, Blue Lagoon Street 34",
+                      style: TextStyle(
+                        fontSize: 10,
+                        //color: tertiaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
+                child: Container(
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 5),
+                    leading: Image.asset(
+                      "assets/icons/oncoming_police.png",
+                      height: 50,
+                      width: 50,
+                    ),
+                    title: const Text(
+                      "Weija Gbawe Municipal",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
+                    subtitle: const Text(
+                      "(+233) 0245513607",
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.black,
+                      ),
+                    ),
+                    trailing: const Text(
+                      "GHC50",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 3.0, horizontal: 8),
+                child: MaterialButton(
+                  height: 60,
+                  minWidth: double.infinity,
+                  color: primaryColor,
+                  onPressed: () {},
+                  child: const Text(
+                    "Call for emergency now",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           Center(
@@ -428,23 +535,10 @@ class _MapPageState extends State<MapPage> {
                                 },
                               );
                             },
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    spreadRadius: 1.5,
-                                    blurRadius: 2,
-                                  )
-                                ],
-                                shape: BoxShape.circle,
-                                color: Colors.green,
-                              ),
-                              child: const Icon(
-                                Icons.person_pin,
-                                size: 23,
-                                color: Colors.white,
-                              ),
+                            child: Image.asset(
+                              "assets/icons/round_pushpin_100px.png",
+                              height: 50,
+                              width: 50,
                             ),
                           );
                         },
@@ -467,10 +561,10 @@ class _MapPageState extends State<MapPage> {
             // Loading indicator overlay
           ),
           if (isLoading)
-            Center(
+            const Center(
               child: CircularProgressIndicator(),
             ),
-          Positioned(
+          /* Positioned(
             left: 20,
             bottom: 20,
             child: Container(
@@ -507,6 +601,7 @@ class _MapPageState extends State<MapPage> {
               ),
             ),
           ),
+        */
         ],
       ),
     );

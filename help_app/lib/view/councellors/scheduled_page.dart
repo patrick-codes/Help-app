@@ -25,7 +25,7 @@ class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: PreferredSize(
+      appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
           iconTheme: const IconThemeData(
@@ -58,108 +58,110 @@ class _SchedulePageState extends State<SchedulePage> {
           ],
         ),
       ),
-      */
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(5),
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  // color: secondaryColor,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _buttonIndex = 0;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 25),
-                        decoration: BoxDecoration(
-                          color:
-                              _buttonIndex == 0 ? primaryColor : secondaryColor,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          "Upcoming",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color:
-                                _buttonIndex == 0 ? Colors.white : primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _buttonIndex = 1;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 25),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color:
-                              _buttonIndex == 1 ? primaryColor : secondaryColor,
-                        ),
-                        child: Text(
-                          "Completed",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color:
-                                _buttonIndex == 1 ? Colors.white : primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _buttonIndex = 2;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 25),
-                        decoration: BoxDecoration(
-                          color:
-                              _buttonIndex == 2 ? primaryColor : secondaryColor,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          "Cancelled",
-                          style: TextStyle(
-                            color:
-                                _buttonIndex == 2 ? Colors.white : primaryColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                // color: secondaryColor,
               ),
-              const SizedBox(height: 20),
-              _scheduleWidgets[_buttonIndex],
-            ],
-          ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _buttonIndex = 0;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 25),
+                      decoration: BoxDecoration(
+                        color:
+                            _buttonIndex == 0 ? primaryColor : secondaryColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Upcoming",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: _buttonIndex == 0
+                                  ? Colors.white
+                                  : primaryColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _buttonIndex = 1;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 25),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color:
+                            _buttonIndex == 1 ? primaryColor : secondaryColor,
+                      ),
+                      child: Text(
+                        "Completed",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color:
+                              _buttonIndex == 1 ? Colors.white : primaryColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _buttonIndex = 2;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 25),
+                      decoration: BoxDecoration(
+                        color:
+                            _buttonIndex == 2 ? primaryColor : secondaryColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        "Cancelled",
+                        style: TextStyle(
+                          color:
+                              _buttonIndex == 2 ? Colors.white : primaryColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            _scheduleWidgets[_buttonIndex],
+          ],
         ),
       ),
     );

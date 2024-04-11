@@ -7,18 +7,25 @@ import 'package:help_app/view/card%20details/card_details.dart';
 import 'package:help_app/view/chat/chat_page.dart';
 import 'package:help_app/view/councellors/councellors_page.dart';
 import 'package:help_app/view/favorite_page.dart';
+import 'package:help_app/view/home/quick%20access/one.dart';
 import '../view/registration/login_screen.dart';
 import '../view/councellors/scheduled_page.dart';
 
-class GridItems extends StatelessWidget {
+class GridItems extends StatefulWidget {
   GridItems({super.key});
 
+  @override
+  State<GridItems> createState() => _GridItemsState();
+}
+
+class _GridItemsState extends State<GridItems> {
   final List pages = [
+    TalkSupportPage(),
+    ChatPage(),
     SchedulePage(),
-    const ChatPage(),
-    SchedulePage(),
-    const ChatPage(),
+    ChatPage(),
   ];
+
   final List cardNames = [
     "card1",
     "card2",
@@ -40,6 +47,14 @@ class GridItems extends StatelessWidget {
     "UNICEF",
   ];
 
+  int index = 0;
+
+  void pageIndex(BuildContext contex, index) {
+    setState(() {
+      index = pages;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -55,12 +70,6 @@ class GridItems extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             Get.to(() => CouncellorsPage());
-            /* 
-           Get.to(() => CardDetails(
-                  newsDetails: news,
-                  address: '',
-                ));
-          */
           },
           child: Container(
             margin: const EdgeInsets.all(10),
